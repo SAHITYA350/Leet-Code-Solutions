@@ -1,0 +1,32 @@
+//Image-Smoother
+
+class Solution {
+    public int[][] imageSmoother(int[][] img) {
+        int row = img.length;
+        int col = img[0].length;
+        int res[][] = new int[row][col];
+
+        int ristedar[][] = {
+            {-1, -1}, {-1, 0}, {-1, 1},
+            {0, -1}, {0, 0}, {0, 1},
+            {1, -1}, {1, 0}, {1, 1}
+        };
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                int sum = 0;
+                int count = 0;
+                for (int[] arr : ristedar) {
+                    int a = i + arr[0]; // Corrected: Add the offset
+                    int b = j + arr[1]; // Corrected: Add the offset
+                    if (a >= 0 && b >= 0 && a < row && b < col) {
+                        sum += img[a][b]; // Add to sum, not just assign
+                        count++;
+                    }
+                }
+                res[i][j] = sum / count;
+            }
+        }
+        return res;
+    }
+}
